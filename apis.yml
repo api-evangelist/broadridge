@@ -1,0 +1,18 @@
+aid: broadridge
+url: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/apis.yml
+apis:
+- aid: broadridge:broadridge-api
+  name: Broadridge Financial Solutions API
+  tags:
+  - Financial Services
+  - Settlement
+  - Reconciliation
+  - SFTP
+  image: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/image.png
+  humanURL: https://www.broadridge.com/
+  baseURL: https://api.broadridge.example.com
+  properties:
+  - url: https://www.broadridge.com/
+    type: Documentation
+  description: >-
+    Broadridge provides technology solutions for the financial services industry including trade settlement, reconciliation, regulatory reporting, and investor communications. APIs and SFTP interfaces enable post-trade processing, proxy distribution, and securities operations.
