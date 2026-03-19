@@ -19,6 +19,8 @@ apis:
     type: Reference
   - url: https://www.broadridge.com/resource/developer-api-contact
     type: GettingStarted
+  - url: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/openapi/broadridge-wealth-openapi.yml
+    type: OpenAPI
   description: >-
     The Broadridge Wealth Management API provides access to account activity, balances, positions, and transaction data for wealth management platforms. REST APIs enable broker-dealers and RIAs to integrate Broadridge back-office clearing and custody data into front-office wealth management applications.
 
@@ -92,6 +94,14 @@ common:
     type: TermsOfService
   - url: https://github.com/wealthapiconnector/Broadridge-Wealth-API-Docs
     type: Documentation
+  - url: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/openapi/broadridge-wealth-openapi.yml
+    type: OpenAPI
+  - url: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/json-schema/broadridge-position-schema.json
+    type: JSONSchema
+  - url: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/json-schema/broadridge-transaction-schema.json
+    type: JSONSchema
+  - url: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/json-ld/broadridge-context.jsonld
+    type: JSONLDContext
 
 maintainers:
 - name: Kin Lane

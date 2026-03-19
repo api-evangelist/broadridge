@@ -1,0 +1,508 @@
+openapi: 3.1.0
+info:
+  title: Broadridge Wealth Management API
+  description: >-
+    The Broadridge Wealth Management API provides access to account activity, balances,
+    positions, and transaction data for wealth management platforms. REST APIs enable
+    broker-dealers and RIAs to integrate Broadridge back-office clearing and custody
+    data into front-office wealth management applications.
+  version: 1.0.0
+  contact:
+    name: Broadridge Developer Contact
+    url: https://www.broadridge.com/resource/developer-api-contact
+
+servers:
+  - url: https://api.broadridge.example.com
+    description: Broadridge Wealth API
+
+security:
+  - oauth2: []
+  - bearerAuth: []
+
+tags:
+  - name: Accounts
+    description: Account information and balances
+  - name: Positions
+    description: Portfolio positions and holdings
+  - name: Transactions
+    description: Account transactions and activity
+  - name: Performance
+    description: Portfolio performance data
+
+paths:
+  /wealth/v1/accounts:
+    get:
+      operationId: listAccounts
+      summary: List accounts
+      description: Retrieve a list of accounts associated with the authenticated advisor or broker.
+      tags: [Accounts]
+      parameters:
+        - name: accountType
+          in: query
+          description: Filter by account type
+          schema:
+            type: string
+            enum: [Brokerage, IRA, Roth_IRA, SEP_IRA, Trust, Custodial]
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [Active, Inactive, Closed, Frozen]
+        - name: repId
+          in: query
+          description: Filter by registered representative ID
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 25
+      responses:
+        '200':
+          description: List of accounts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /wealth/v1/accounts/{accountNumber}:
+    get:
+      operationId: getAccount
+      summary: Get account details
+      description: Retrieve full details for a specific account including balance and registration information.
+      tags: [Accounts]
+      parameters:
+        - name: accountNumber
+          in: path
+          required: true
+          description: Account number
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Account details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /wealth/v1/accounts/{accountNumber}/balances:
+    get:
+      operationId: getAccountBalances
+      summary: Get account balances
+      description: Retrieve current and as-of-date balance information for an account.
+      tags: [Accounts]
+      parameters:
+        - name: accountNumber
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: asOfDate
+          in: query
+          description: Get balances as of a specific date
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Account balances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountBalances'
+
+  /wealth/v1/accounts/{accountNumber}/positions:
+    get:
+      operationId: getAccountPositions
+      summary: Get account positions
+      description: Retrieve all securities holdings/positions in an account.
+      tags: [Positions]
+      parameters:
+        - name: accountNumber
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: asOfDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: assetClass
+          in: query
+          schema:
+            type: string
+            enum: [Equity, FixedIncome, MutualFund, ETF, Options, Cash, Alternative]
+      responses:
+        '200':
+          description: Account positions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PositionList'
+
+  /wealth/v1/accounts/{accountNumber}/transactions:
+    get:
+      operationId: getAccountTransactions
+      summary: Get account transactions
+      description: Retrieve transaction history for an account within a date range.
+      tags: [Transactions]
+      parameters:
+        - name: accountNumber
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fromDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: transactionType
+          in: query
+          schema:
+            type: string
+            enum: [Buy, Sell, Dividend, Interest, Transfer, Fee, Deposit, Withdrawal, Reinvestment]
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: Account transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionList'
+
+  /wealth/v1/accounts/{accountNumber}/performance:
+    get:
+      operationId: getAccountPerformance
+      summary: Get account performance
+      description: Retrieve time-weighted return and performance metrics for an account.
+      tags: [Performance]
+      parameters:
+        - name: accountNumber
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fromDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: benchmark
+          in: query
+          description: Benchmark ticker symbol for comparison
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Account performance data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountPerformance'
+
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.broadridge.example.com/oauth/token
+          scopes:
+            accounts:read: Read account data
+            positions:read: Read position data
+            transactions:read: Read transaction data
+    bearerAuth:
+      type: http
+      scheme: bearer
+
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+    AccountList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+
+    Account:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        accountName:
+          type: string
+        accountType:
+          type: string
+          enum: [Brokerage, IRA, Roth_IRA, SEP_IRA, Trust, Custodial]
+        status:
+          type: string
+          enum: [Active, Inactive, Closed, Frozen]
+        registrationType:
+          type: string
+        taxId:
+          type: string
+        repId:
+          type: string
+        branchCode:
+          type: string
+        openDate:
+          type: string
+          format: date
+        closeDate:
+          type: string
+          format: date
+        primaryHolder:
+          $ref: '#/components/schemas/AccountHolder'
+        jointHolder:
+          $ref: '#/components/schemas/AccountHolder'
+        currentValue:
+          type: number
+        currency:
+          type: string
+          default: USD
+
+    AccountHolder:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        ssn:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+        address:
+          $ref: '#/components/schemas/Address'
+
+    AccountBalances:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        asOfDate:
+          type: string
+          format: date
+        totalAccountValue:
+          type: number
+        netAccountValue:
+          type: number
+        cashBalance:
+          type: number
+        marginBalance:
+          type: number
+        longMarketValue:
+          type: number
+        shortMarketValue:
+          type: number
+        openOrderValue:
+          type: number
+        currency:
+          type: string
+
+    PositionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Position'
+        totalMarketValue:
+          type: number
+
+    Position:
+      type: object
+      properties:
+        positionId:
+          type: string
+        accountNumber:
+          type: string
+        cusip:
+          type: string
+        symbol:
+          type: string
+        securityDescription:
+          type: string
+        assetClass:
+          type: string
+          enum: [Equity, FixedIncome, MutualFund, ETF, Options, Cash, Alternative]
+        quantity:
+          type: number
+        price:
+          type: number
+        marketValue:
+          type: number
+        costBasis:
+          type: number
+        unrealizedGainLoss:
+          type: number
+        unrealizedGainLossPct:
+          type: number
+        currency:
+          type: string
+        asOfDate:
+          type: string
+          format: date
+
+    TransactionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+
+    Transaction:
+      type: object
+      properties:
+        transactionId:
+          type: string
+        accountNumber:
+          type: string
+        tradeDate:
+          type: string
+          format: date
+        settleDate:
+          type: string
+          format: date
+        transactionType:
+          type: string
+          enum: [Buy, Sell, Dividend, Interest, Transfer, Fee, Deposit, Withdrawal, Reinvestment]
+        cusip:
+          type: string
+        symbol:
+          type: string
+        securityDescription:
+          type: string
+        quantity:
+          type: number
+        price:
+          type: number
+        netAmount:
+          type: number
+        grossAmount:
+          type: number
+        commission:
+          type: number
+        fees:
+          type: number
+        currency:
+          type: string
+
+    AccountPerformance:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        fromDate:
+          type: string
+          format: date
+        toDate:
+          type: string
+          format: date
+        timeWeightedReturn:
+          type: number
+          description: Time-weighted rate of return as percentage
+        moneyWeightedReturn:
+          type: number
+        beginningValue:
+          type: number
+        endingValue:
+          type: number
+        netCashFlow:
+          type: number
+        incomeEarned:
+          type: number
+        benchmarkReturn:
+          type: number
+        benchmarkSymbol:
+          type: string
+
+    Address:
+      type: object
+      properties:
+        street1:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalPages:
+          type: integer
+        totalItems:
+          type: integer
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string

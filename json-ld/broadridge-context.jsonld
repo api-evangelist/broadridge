@@ -1,0 +1,73 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "br": "https://api.broadridge.example.com/wealth/",
+    "schema": "https://schema.org/",
+    "fibo": "https://spec.edmcouncil.org/fibo/ontology/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Account": {
+      "@id": "fibo:FinancialAccount",
+      "@context": {
+        "accountNumber": {"@id": "schema:identifier"},
+        "accountName": {"@id": "schema:name"},
+        "accountType": {"@id": "br:accountType"},
+        "status": {"@id": "br:accountStatus"},
+        "repId": {"@id": "br:representativeId"},
+        "openDate": {"@id": "schema:startDate", "@type": "xsd:date"},
+        "closeDate": {"@id": "schema:endDate", "@type": "xsd:date"},
+        "primaryHolder": {"@id": "schema:accountablePerson"},
+        "currentValue": {"@id": "schema:value", "@type": "xsd:decimal"},
+        "currency": {"@id": "schema:currency"}
+      }
+    },
+
+    "Position": {
+      "@id": "fibo:SecurityPosition",
+      "@context": {
+        "positionId": {"@id": "schema:identifier"},
+        "accountNumber": {"@id": "br:accountNumber"},
+        "cusip": {"@id": "fibo:CUSIP"},
+        "symbol": {"@id": "schema:tickerSymbol"},
+        "securityDescription": {"@id": "schema:name"},
+        "assetClass": {"@id": "fibo:assetClass"},
+        "quantity": {"@id": "fibo:numberOfUnits", "@type": "xsd:decimal"},
+        "price": {"@id": "schema:price", "@type": "xsd:decimal"},
+        "marketValue": {"@id": "fibo:marketValue", "@type": "xsd:decimal"},
+        "costBasis": {"@id": "fibo:costBasis", "@type": "xsd:decimal"},
+        "unrealizedGainLoss": {"@id": "fibo:unrealizedGainLoss", "@type": "xsd:decimal"},
+        "currency": {"@id": "schema:currency"},
+        "asOfDate": {"@id": "br:asOfDate", "@type": "xsd:date"}
+      }
+    },
+
+    "Transaction": {
+      "@id": "schema:MoneyTransfer",
+      "@context": {
+        "transactionId": {"@id": "schema:identifier"},
+        "accountNumber": {"@id": "br:accountNumber"},
+        "tradeDate": {"@id": "schema:bookingTime", "@type": "xsd:date"},
+        "settleDate": {"@id": "br:settleDate", "@type": "xsd:date"},
+        "transactionType": {"@id": "schema:transactionType"},
+        "cusip": {"@id": "fibo:CUSIP"},
+        "symbol": {"@id": "schema:tickerSymbol"},
+        "quantity": {"@id": "fibo:numberOfUnits", "@type": "xsd:decimal"},
+        "price": {"@id": "schema:price", "@type": "xsd:decimal"},
+        "netAmount": {"@id": "br:netAmount", "@type": "xsd:decimal"},
+        "grossAmount": {"@id": "br:grossAmount", "@type": "xsd:decimal"},
+        "commission": {"@id": "br:commission", "@type": "xsd:decimal"},
+        "currency": {"@id": "schema:currency"}
+      }
+    },
+
+    "AccountHolder": {
+      "@id": "schema:Person",
+      "@context": {
+        "firstName": {"@id": "schema:givenName"},
+        "lastName": {"@id": "schema:familyName"},
+        "dateOfBirth": {"@id": "schema:birthDate", "@type": "xsd:date"},
+        "address": {"@id": "schema:address"}
+      }
+    }
+  }
+}

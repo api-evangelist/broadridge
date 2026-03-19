@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/json-schema/broadridge-position-schema.json",
+  "title": "Broadridge Position",
+  "description": "JSON Schema for a Broadridge Wealth Management securities position (holding) in a brokerage account.",
+  "type": "object",
+  "required": ["positionId", "accountNumber", "symbol", "quantity"],
+  "properties": {
+    "positionId": {
+      "type": "string",
+      "description": "Unique position identifier"
+    },
+    "accountNumber": {
+      "type": "string",
+      "description": "Brokerage account number"
+    },
+    "cusip": {
+      "type": "string",
+      "description": "Committee on Uniform Securities Identification Procedures number",
+      "pattern": "^[A-Z0-9]{9}$"
+    },
+    "symbol": {
+      "type": "string",
+      "description": "Ticker symbol"
+    },
+    "securityDescription": {
+      "type": "string",
+      "description": "Full security name/description"
+    },
+    "assetClass": {
+      "type": "string",
+      "enum": ["Equity", "FixedIncome", "MutualFund", "ETF", "Options", "Cash", "Alternative"]
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Number of shares or units held"
+    },
+    "price": {
+      "type": "number",
+      "description": "Current price per share/unit",
+      "minimum": 0
+    },
+    "marketValue": {
+      "type": "number",
+      "description": "Total market value (quantity * price)"
+    },
+    "costBasis": {
+      "type": "number",
+      "description": "Total cost basis for the position"
+    },
+    "unrealizedGainLoss": {
+      "type": "number",
+      "description": "Unrealized gain/loss (marketValue - costBasis)"
+    },
+    "unrealizedGainLossPct": {
+      "type": "number",
+      "description": "Unrealized gain/loss as percentage of cost basis"
+    },
+    "currency": {
+      "type": "string",
+      "default": "USD",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "asOfDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the position data is as-of"
+    }
+  }
+}

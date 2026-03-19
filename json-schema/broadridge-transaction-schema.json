@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/json-schema/broadridge-transaction-schema.json",
+  "title": "Broadridge Transaction",
+  "description": "JSON Schema for a Broadridge brokerage account transaction.",
+  "type": "object",
+  "required": ["transactionId", "accountNumber", "transactionType", "tradeDate", "netAmount"],
+  "properties": {
+    "transactionId": {
+      "type": "string"
+    },
+    "accountNumber": {
+      "type": "string"
+    },
+    "tradeDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "settleDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "transactionType": {
+      "type": "string",
+      "enum": ["Buy", "Sell", "Dividend", "Interest", "Transfer", "Fee", "Deposit", "Withdrawal", "Reinvestment"]
+    },
+    "cusip": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]{9}$"
+    },
+    "symbol": {
+      "type": "string"
+    },
+    "securityDescription": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "number"
+    },
+    "price": {
+      "type": "number",
+      "minimum": 0
+    },
+    "netAmount": {
+      "type": "number",
+      "description": "Net transaction amount after commissions and fees"
+    },
+    "grossAmount": {
+      "type": "number",
+      "description": "Gross transaction amount before commissions and fees"
+    },
+    "commission": {
+      "type": "number",
+      "minimum": 0
+    },
+    "fees": {
+      "type": "number",
+      "minimum": 0
+    },
+    "currency": {
+      "type": "string",
+      "default": "USD",
+      "pattern": "^[A-Z]{3}$"
+    }
+  }
+}
