@@ -1,30 +1,25 @@
 aid: broadridge
-url: 
-  https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/apis.yml
 apis:
   - aid: broadridge:broadridge-wealth-api
     name: Broadridge Wealth Management API
     tags:
-      - Financial Services
-      - Wealth Management
       - Account Data
+      - Financial Services
       - Positions
       - Transactions
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/image.png
-    humanURL: 
-      https://www.broadridge.com/capability/middle-and-back-office-solutions/wealth-operations/
+      - Wealth Management
+    image: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/image.png
+    humanURL: https://www.broadridge.com/capability/middle-and-back-office-solutions/wealth-operations/
     baseURL: https://api.broadridge.example.com
     properties:
-      - url: 
-          https://www.broadridge.com/capability/middle-and-back-office-solutions/wealth-operations/
+      - url: https://www.broadridge.com/capability/middle-and-back-office-solutions/wealth-operations/
         type: Documentation
       - url: https://github.com/wealthapiconnector/Broadridge-Wealth-API-Docs
         type: Reference
       - url: https://www.broadridge.com/resource/developer-api-contact
         type: GettingStarted
-      - url: 
-          https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/openapi/broadridge-wealth-openapi.yml
+      - url: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/openapi/broadridge-wealth-openapi.yml
         type: OpenAPI
     description: >-
       The Broadridge Wealth Management API provides access to account activity, balances,
@@ -35,19 +30,16 @@ apis:
   - aid: broadridge:broadridge-fund-data-api
     name: Broadridge Fund Data Distribution (Galaxia) API
     tags:
+      - Asset Management
       - Financial Services
       - Fund Data
-      - Asset Management
       - Regulatory Reporting
       - UCITS
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/image.png
-    humanURL: 
-      https://www.broadridge.com/financial-services/asset-management/global-funds/simplify-financial-and-regulatory-reporting/fund-data-distribution-with-the-galaxia-data-api
+    image: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/image.png
+    humanURL: https://www.broadridge.com/financial-services/asset-management/global-funds/simplify-financial-and-regulatory-reporting/fund-data-distribution-with-the-galaxia-data-api
     baseURL: https://dataapi-web.fundslibrary.net
     properties:
-      - url: 
-          https://www.broadridge.com/financial-services/asset-management/global-funds/simplify-financial-and-regulatory-reporting/fund-data-distribution-with-the-galaxia-data-api
+      - url: https://www.broadridge.com/financial-services/asset-management/global-funds/simplify-financial-and-regulatory-reporting/fund-data-distribution-with-the-galaxia-data-api
         type: Documentation
       - url: https://dataapi-web.fundslibrary.net/
         type: Reference
@@ -60,13 +52,12 @@ apis:
   - aid: broadridge:broadridge-investor-communications-api
     name: Broadridge Investor Communications API
     tags:
+      - Corporate Actions
       - Financial Services
       - Investor Communications
       - Proxy
-      - Corporate Actions
       - Shareholder Services
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/image.png
+    image: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/image.png
     humanURL: https://www.broadridge.com/
     baseURL: https://api.broadridge.example.com
     properties:
@@ -84,12 +75,11 @@ apis:
     name: Broadridge Post-Trade Processing API
     tags:
       - Financial Services
-      - Settlement
-      - Reconciliation
       - Post-Trade
+      - Reconciliation
+      - Settlement
       - SFTP
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/image.png
+    image: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/image.png
     humanURL: https://www.broadridge.com/
     baseURL: https://api.broadridge.example.com
     properties:
@@ -116,17 +106,13 @@ common:
     type: TermsOfService
   - url: https://github.com/wealthapiconnector/Broadridge-Wealth-API-Docs
     type: Documentation
-  - url: 
-      https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/openapi/broadridge-wealth-openapi.yml
+  - url: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/openapi/broadridge-wealth-openapi.yml
     type: OpenAPI
-  - url: 
-      https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/json-schema/broadridge-position-schema.json
+  - url: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/json-schema/broadridge-position-schema.json
     type: JSONSchema
-  - url: 
-      https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/json-schema/broadridge-transaction-schema.json
+  - url: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/json-schema/broadridge-transaction-schema.json
     type: JSONSchema
-  - url: 
-      https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/json-ld/broadridge-context.jsonld
+  - url: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/json-ld/broadridge-context.jsonld
     type: JSONLDContext
 
 maintainers:

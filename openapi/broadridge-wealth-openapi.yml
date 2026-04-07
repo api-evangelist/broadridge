@@ -22,13 +22,13 @@ security:
 tags:
   - name: Accounts
     description: Account information and balances
+  - name: Performance
+    description: Portfolio performance data
+
   - name: Positions
     description: Portfolio positions and holdings
   - name: Transactions
     description: Account transactions and activity
-  - name: Performance
-    description: Portfolio performance data
-
 paths:
   /wealth/v1/accounts:
     get:
