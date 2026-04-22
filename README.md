@@ -1,10 +1,15 @@
-# Unknown (broadridge)
+# Broadridge (broadridge)
+Broadridge Financial Solutions is a global financial technology company providing investor communications, technology-driven solutions, and data analytics to broker-dealers, banks, asset managers, and wealth management firms. Broadridge processes trillions of dollars in securities transactions and distributes proxy materials to hundreds of millions of investors annually.
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/apis.yml)
 
+## Tags:
+
+ - Financial Services, Wealth Management, Asset Management, Investor Communications, Post-Trade, Settlement, Fund Data, Regulatory Reporting
+
 ## Timestamps
 
-- **Modified:** 2026-03-18 
+- **Modified:** 2026-04-21
 
 ## APIs
 
@@ -12,7 +17,6 @@
 The Broadridge Wealth Management API provides access to account activity, balances, positions, and transaction data for wealth management platforms. REST APIs enable broker-dealers and RIAs to integrate Broadridge back-office clearing and custody data into front-office wealth management applications.
 
 **Human URL:** [https://www.broadridge.com/capability/middle-and-back-office-solutions/wealth-operations/](https://www.broadridge.com/capability/middle-and-back-office-solutions/wealth-operations/)
-
 
 #### Tags:
 
@@ -30,7 +34,6 @@ The Broadridge Galaxia Fund Data API enables access to and distribution of globa
 
 **Human URL:** [https://www.broadridge.com/financial-services/asset-management/global-funds/simplify-financial-and-regulatory-reporting/fund-data-distribution-with-the-galaxia-data-api](https://www.broadridge.com/financial-services/asset-management/global-funds/simplify-financial-and-regulatory-reporting/fund-data-distribution-with-the-galaxia-data-api)
 
-
 #### Tags:
 
  - Financial Services, Fund Data, Asset Management, Regulatory Reporting, UCITS
@@ -45,7 +48,6 @@ The Broadridge Investor Communications API provides access to proxy distribution
 
 **Human URL:** [https://www.broadridge.com/](https://www.broadridge.com/)
 
-
 #### Tags:
 
  - Financial Services, Investor Communications, Proxy, Corporate Actions, Shareholder Services
@@ -59,7 +61,6 @@ The Broadridge Investor Communications API provides access to proxy distribution
 The Broadridge Post-Trade Processing API provides access to trade settlement, reconciliation, and regulatory reporting functions. APIs and SFTP interfaces enable post-trade processing automation, fail management, and securities operations for broker-dealers and asset managers.
 
 **Human URL:** [https://www.broadridge.com/](https://www.broadridge.com/)
-
 
 #### Tags:
 
