@@ -1,0 +1,417 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Broadridge Wealth Management API
+  description: The Broadridge Wealth Management API provides access to account activity, balances, positions, and transaction
+    data for wealth management platforms. REST APIs enable broker-dealers and RIAs to integrate Broadridge back-office clearing
+    and custody data into front-office wealth management applications.
+  tags:
+  - Broadridge
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: broadridge
+    baseUri: https://api.broadridge.example.com
+    description: Broadridge Wealth Management API HTTP API.
+    authentication:
+      type: bearer
+      token: '{{BROADRIDGE_TOKEN}}'
+    resources:
+    - name: wealth-v1-accounts
+      path: /wealth/v1/accounts
+      operations:
+      - name: listaccounts
+        method: GET
+        description: List accounts
+        inputParameters:
+        - name: accountType
+          in: query
+          type: string
+          description: Filter by account type
+        - name: status
+          in: query
+          type: string
+        - name: repId
+          in: query
+          type: string
+          description: Filter by registered representative ID
+        - name: page
+          in: query
+          type: integer
+        - name: pageSize
+          in: query
+          type: integer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: wealth-v1-accounts-accountnumber
+      path: /wealth/v1/accounts/{accountNumber}
+      operations:
+      - name: getaccount
+        method: GET
+        description: Get account details
+        inputParameters:
+        - name: accountNumber
+          in: path
+          type: string
+          required: true
+          description: Account number
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: wealth-v1-accounts-accountnumber-balances
+      path: /wealth/v1/accounts/{accountNumber}/balances
+      operations:
+      - name: getaccountbalances
+        method: GET
+        description: Get account balances
+        inputParameters:
+        - name: accountNumber
+          in: path
+          type: string
+          required: true
+        - name: asOfDate
+          in: query
+          type: string
+          description: Get balances as of a specific date
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: wealth-v1-accounts-accountnumber-positions
+      path: /wealth/v1/accounts/{accountNumber}/positions
+      operations:
+      - name: getaccountpositions
+        method: GET
+        description: Get account positions
+        inputParameters:
+        - name: accountNumber
+          in: path
+          type: string
+          required: true
+        - name: asOfDate
+          in: query
+          type: string
+        - name: assetClass
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: wealth-v1-accounts-accountnumber-transactions
+      path: /wealth/v1/accounts/{accountNumber}/transactions
+      operations:
+      - name: getaccounttransactions
+        method: GET
+        description: Get account transactions
+        inputParameters:
+        - name: accountNumber
+          in: path
+          type: string
+          required: true
+        - name: fromDate
+          in: query
+          type: string
+          required: true
+        - name: toDate
+          in: query
+          type: string
+        - name: transactionType
+          in: query
+          type: string
+        - name: page
+          in: query
+          type: integer
+        - name: pageSize
+          in: query
+          type: integer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: wealth-v1-accounts-accountnumber-performance
+      path: /wealth/v1/accounts/{accountNumber}/performance
+      operations:
+      - name: getaccountperformance
+        method: GET
+        description: Get account performance
+        inputParameters:
+        - name: accountNumber
+          in: path
+          type: string
+          required: true
+        - name: fromDate
+          in: query
+          type: string
+          required: true
+        - name: toDate
+          in: query
+          type: string
+        - name: benchmark
+          in: query
+          type: string
+          description: Benchmark ticker symbol for comparison
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: broadridge-rest
+    description: REST adapter for Broadridge Wealth Management API.
+    resources:
+    - path: /wealth/v1/accounts
+      name: listaccounts
+      operations:
+      - method: GET
+        name: listaccounts
+        description: List accounts
+        call: broadridge.listaccounts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /wealth/v1/accounts/{accountNumber}
+      name: getaccount
+      operations:
+      - method: GET
+        name: getaccount
+        description: Get account details
+        call: broadridge.getaccount
+        with:
+          accountNumber: rest.accountNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /wealth/v1/accounts/{accountNumber}/balances
+      name: getaccountbalances
+      operations:
+      - method: GET
+        name: getaccountbalances
+        description: Get account balances
+        call: broadridge.getaccountbalances
+        with:
+          accountNumber: rest.accountNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /wealth/v1/accounts/{accountNumber}/positions
+      name: getaccountpositions
+      operations:
+      - method: GET
+        name: getaccountpositions
+        description: Get account positions
+        call: broadridge.getaccountpositions
+        with:
+          accountNumber: rest.accountNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /wealth/v1/accounts/{accountNumber}/transactions
+      name: getaccounttransactions
+      operations:
+      - method: GET
+        name: getaccounttransactions
+        description: Get account transactions
+        call: broadridge.getaccounttransactions
+        with:
+          accountNumber: rest.accountNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /wealth/v1/accounts/{accountNumber}/performance
+      name: getaccountperformance
+      operations:
+      - method: GET
+        name: getaccountperformance
+        description: Get account performance
+        call: broadridge.getaccountperformance
+        with:
+          accountNumber: rest.accountNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: broadridge-mcp
+    transport: http
+    description: MCP adapter for Broadridge Wealth Management API for AI agent use.
+    tools:
+    - name: listaccounts
+      description: List accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: broadridge.listaccounts
+      with:
+        accountType: tools.accountType
+        status: tools.status
+        repId: tools.repId
+        page: tools.page
+        pageSize: tools.pageSize
+      inputParameters:
+      - name: accountType
+        type: string
+        description: Filter by account type
+      - name: status
+        type: string
+        description: status
+      - name: repId
+        type: string
+        description: Filter by registered representative ID
+      - name: page
+        type: integer
+        description: page
+      - name: pageSize
+        type: integer
+        description: pageSize
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getaccount
+      description: Get account details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: broadridge.getaccount
+      with:
+        accountNumber: tools.accountNumber
+      inputParameters:
+      - name: accountNumber
+        type: string
+        description: Account number
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getaccountbalances
+      description: Get account balances
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: broadridge.getaccountbalances
+      with:
+        accountNumber: tools.accountNumber
+        asOfDate: tools.asOfDate
+      inputParameters:
+      - name: accountNumber
+        type: string
+        description: accountNumber
+        required: true
+      - name: asOfDate
+        type: string
+        description: Get balances as of a specific date
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getaccountpositions
+      description: Get account positions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: broadridge.getaccountpositions
+      with:
+        accountNumber: tools.accountNumber
+        asOfDate: tools.asOfDate
+        assetClass: tools.assetClass
+      inputParameters:
+      - name: accountNumber
+        type: string
+        description: accountNumber
+        required: true
+      - name: asOfDate
+        type: string
+        description: asOfDate
+      - name: assetClass
+        type: string
+        description: assetClass
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getaccounttransactions
+      description: Get account transactions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: broadridge.getaccounttransactions
+      with:
+        accountNumber: tools.accountNumber
+        fromDate: tools.fromDate
+        toDate: tools.toDate
+        transactionType: tools.transactionType
+        page: tools.page
+        pageSize: tools.pageSize
+      inputParameters:
+      - name: accountNumber
+        type: string
+        description: accountNumber
+        required: true
+      - name: fromDate
+        type: string
+        description: fromDate
+        required: true
+      - name: toDate
+        type: string
+        description: toDate
+      - name: transactionType
+        type: string
+        description: transactionType
+      - name: page
+        type: integer
+        description: page
+      - name: pageSize
+        type: integer
+        description: pageSize
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getaccountperformance
+      description: Get account performance
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: broadridge.getaccountperformance
+      with:
+        accountNumber: tools.accountNumber
+        fromDate: tools.fromDate
+        toDate: tools.toDate
+        benchmark: tools.benchmark
+      inputParameters:
+      - name: accountNumber
+        type: string
+        description: accountNumber
+        required: true
+      - name: fromDate
+        type: string
+        description: fromDate
+        required: true
+      - name: toDate
+        type: string
+        description: toDate
+      - name: benchmark
+        type: string
+        description: Benchmark ticker symbol for comparison
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    BROADRIDGE_TOKEN: BROADRIDGE_TOKEN
