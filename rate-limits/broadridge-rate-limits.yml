@@ -1,99 +1,55 @@
 specification: API Commons Rate Limits
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
-provider: broadridge
+provider: Broadridge
 providerId: broadridge
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
+  - Financial Services
+  - Wealth Management
+  - Asset Management
+  - Investor Communications
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the broadridge API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: Broadridge does not publish API rate limits on a public developer portal. The Wealth Management,
+  Galaxia Fund Data, and Investor Communications APIs are accessed by contracted customers; rate-limit
+  terms are conveyed in the platform contract and onboarding documents. Consumers should expect HTTP
+  429 throttling on overuse and apply exponential backoff.
+sources:
+  - https://www.broadridge.com/
+  - https://github.com/wealthapiconnector/Broadridge-Wealth-API-Docs
+notes: Per-API rate limits are not publicly published; values are contract / onboarding specific.
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Broadridge Wealth Management API
-      - Broadridge Fund Data Distribution (Galaxia) API
-      - Broadridge Investor Communications API
-      - Broadridge Post-Trade Processing API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Broadridge Wealth Management API
-      - Broadridge Fund Data Distribution (Galaxia) API
-      - Broadridge Investor Communications API
-      - Broadridge Post-Trade Processing API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Broadridge Wealth Management API
-      - Broadridge Fund Data Distribution (Galaxia) API
-      - Broadridge Investor Communications API
-      - Broadridge Post-Trade Processing API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Broadridge Wealth Management API
-      - Broadridge Fund Data Distribution (Galaxia) API
-      - Broadridge Investor Communications API
-      - Broadridge Post-Trade Processing API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
+  - name: Wealth Management API
     scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Broadridge Wealth Management API
-      - Broadridge Fund Data Distribution (Galaxia) API
-      - Broadridge Investor Communications API
-      - Broadridge Post-Trade Processing API
+    metric: varies
+    limit: 'see contract / onboarding documentation'
+  - name: Galaxia Fund Data API
+    scope: contract
+    metric: varies
+    limit: 'see contract / onboarding documentation'
+  - name: Investor Communications API
+    scope: contract
+    metric: varies
+    limit: 'see contract / onboarding documentation'
 policies:
   - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
+    description: Apply exponential backoff with jitter on 429 / 503 responses; honor Retry-After when
+      present.
+  - name: Contract-Bound Capacity
+    description: Effective request capacity is set by the platform contract and partner onboarding documents,
+      not via a public tier page.
+  - name: Batch-Oriented Processing
+    description: Many Broadridge data feeds (positions, transactions, fund data) are intentionally batch-oriented;
+      align integration design with the documented file / API cadence rather than driving high-frequency
+      polling.
   - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+    description: Sustained traffic that materially impacts shared infrastructure may trigger throttling
+      regardless of contract.
 maintainers:
-  - name: Kin Lane
-    email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: info@apievangelist.com

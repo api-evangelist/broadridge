@@ -1,159 +1,103 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-provider: broadridge
+provider: Broadridge
 providerId: broadridge
-publisherName: broadridge
-serviceCategory: API
+publisherName: Broadridge Financial Solutions, Inc.
+serviceCategory: Financial Services Technology
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
+  - Financial Services
+  - Wealth Management
+  - Asset Management
+  - Investor Communications
+  - Regulatory Reporting
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the broadridge API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: 'FOCUS-aligned FinOps for Broadridge: enterprise platform subscriptions across Wealth Operations,
+  Asset Management / Galaxia Fund Data, and Investor Communications. Pricing is contracted per platform
+  subscription and tied to accounts, AUM, and communications volume; APIs ship with the underlying platform
+  rather than being separately metered.'
+sources:
+  - https://www.broadridge.com/
+  - https://github.com/wealthapiconnector/Broadridge-Wealth-API-Docs
+notes: Broadridge is not metered per API call; cost is governed by the platform subscription and per-event
+  communications volume in the master services agreement.
 billingModel:
-  pricingCategory: Usage-Based
+  pricingCategory: Enterprise Subscription + Volume
   billingFrequency: Monthly
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
+    - Usage
     - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
-  ServiceName: broadridge
-  ServiceCategory: Developer Tools / API
-  ProviderName: broadridge
-  PublisherName: broadridge
-  InvoiceIssuerName: broadridge
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceName: Broadridge
+  ServiceCategory: Financial Services Technology
+  ProviderName: Broadridge
+  PublisherName: Broadridge Financial Solutions, Inc.
+  InvoiceIssuerName: Broadridge Financial Solutions, Inc.
   BillingCurrency: USD
-  ChargeCategory: Usage
+  PricingCategory: Standard
+  PricingUnit: subscription-month
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: platform_subscription
+    description: Monthly subscription fee for the contracted Broadridge platform module.
+    unit: month
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
+      - product_line
       - tier
+  - name: accounts
+    description: Number of accounts under management on the Wealth Operations / clearing platform.
+    unit: account
+    aggregation: max
+    dimensions:
+      - product_line
       - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+  - name: aum
+    description: Assets Under Management used as a billing dimension for asset-management modules.
+    unit: currency
+    aggregation: max
+    dimensions:
+      - product_line
+      - currency
+  - name: investor_communications
+    description: Investor communications (proxy, regulatory, statements) processed.
+    unit: communication
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
+      - communication_type
+      - channel
+  - name: fund_data_records
+    description: Galaxia fund-data records distributed for regulatory reporting.
+    unit: record
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Broadridge Wealth Management API
-    baseURL: https://api.broadridge.example.com
-    tags:
-      - Account Data
-      - Financial Services
-      - Positions
-      - Transactions
-      - Wealth Management
-    serviceName: Broadridge Wealth Management API
-    serviceCategory: API
-  - name: Broadridge Fund Data Distribution (Galaxia) API
-    baseURL: https://dataapi-web.fundslibrary.net
-    tags:
-      - Asset Management
-      - Financial Services
-      - Fund Data
-      - Regulatory Reporting
-      - UCITS
-    serviceName: Broadridge Fund Data Distribution (Galaxia) API
-    serviceCategory: API
-  - name: Broadridge Investor Communications API
-    baseURL: https://api.broadridge.example.com
-    tags:
-      - Corporate Actions
-      - Financial Services
-      - Investor Communications
-      - Proxy
-      - Shareholder Services
-    serviceName: Broadridge Investor Communications API
-    serviceCategory: API
-  - name: Broadridge Post-Trade Processing API
-    baseURL: https://api.broadridge.example.com
-    tags:
-      - Financial Services
-      - Post-Trade
-      - Reconciliation
-      - Settlement
-      - SFTP
-    serviceName: Broadridge Post-Trade Processing API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - regulation
+      - fund
+principles:
+  - name: Visibility
+    description: Pull invoice and platform usage reports from Broadridge account management; reconcile
+      account counts, AUM, and communications volume against the contracted ceilings on a monthly cadence.
+  - name: Allocation
+    description: Allocate platform fees by product line, channel, and regulatory regime so wealth, asset-management,
+      and communications spend route to the correct internal cost centers.
+  - name: Optimization
+    description: Consolidate communications channels (digital vs paper), align fund-data feed cadence
+      with downstream requirements, and renegotiate volume tiers at renewal as account / AUM growth materializes.
+  - name: Accountability
+    description: Designate a Broadridge relationship owner per platform module; review monthly invoices,
+      dispute discrepancies, and forecast renewals against business growth targets.
 maintainers:
-  - name: Kin Lane
-    email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: info@apievangelist.com
