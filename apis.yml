@@ -115,6 +115,11 @@ common:
   - url: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/json-ld/broadridge-context.jsonld
     type: JSONLDContext
 
+  - type: Integrations
+    url: https://marketplace.broadridge.com/Marketplace
+integrations:
+  - name: Site Name
+  - name: Broadridge
 maintainers:
   - name: Kin Lane
     email: kin@apievangelist.com
