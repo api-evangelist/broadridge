@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Broadridge Wealth Management API — Transactions
+  description: 'Broadridge Wealth Management API — Transactions. 1 operations. Lead operation: Get account transactions. Self-contained
+    Naftiko capability covering one Broadridge business surface.'
+  tags:
+  - Broadridge
+  - Transactions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    BROADRIDGE_API_KEY: BROADRIDGE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: wealth-transactions
+    baseUri: https://api.broadridge.example.com
+    description: Broadridge Wealth Management API — Transactions business capability. Self-contained, no shared references.
+    resources:
+    - name: wealth-v1-accounts-accountNumber-transactions
+      path: /wealth/v1/accounts/{accountNumber}/transactions
+      operations:
+      - name: getaccounttransactions
+        method: GET
+        description: Get account transactions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountNumber
+          in: path
+          type: string
+          required: true
+        - name: fromDate
+          in: query
+          type: string
+          required: true
+        - name: toDate
+          in: query
+          type: string
+        - name: transactionType
+          in: query
+          type: string
+        - name: page
+          in: query
+          type: integer
+        - name: pageSize
+          in: query
+          type: integer
+    authentication:
+      type: bearer
+      token: '{{env.BROADRIDGE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: wealth-transactions-rest
+    port: 8080
+    description: REST adapter for Broadridge Wealth Management API — Transactions. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/wealth/v1/accounts/{accountnumber}/transactions
+      name: wealth-v1-accounts-accountnumber-transactions
+      description: REST surface for wealth-v1-accounts-accountNumber-transactions.
+      operations:
+      - method: GET
+        name: getaccounttransactions
+        description: Get account transactions
+        call: wealth-transactions.getaccounttransactions
+        with:
+          accountNumber: rest.accountNumber
+          fromDate: rest.fromDate
+          toDate: rest.toDate
+          transactionType: rest.transactionType
+          page: rest.page
+          pageSize: rest.pageSize
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: wealth-transactions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Broadridge Wealth Management API — Transactions. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: get-account-transactions
+      description: Get account transactions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: wealth-transactions.getaccounttransactions
+      with:
+        accountNumber: tools.accountNumber
+        fromDate: tools.fromDate
+        toDate: tools.toDate
+        transactionType: tools.transactionType
+        page: tools.page
+        pageSize: tools.pageSize
+      outputParameters:
+      - type: object
+        mapping: $.

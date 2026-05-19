@@ -1,0 +1,89 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Broadridge Wealth Management API — Positions
+  description: 'Broadridge Wealth Management API — Positions. 1 operations. Lead operation: Get account positions. Self-contained
+    Naftiko capability covering one Broadridge business surface.'
+  tags:
+  - Broadridge
+  - Positions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    BROADRIDGE_API_KEY: BROADRIDGE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: wealth-positions
+    baseUri: https://api.broadridge.example.com
+    description: Broadridge Wealth Management API — Positions business capability. Self-contained, no shared references.
+    resources:
+    - name: wealth-v1-accounts-accountNumber-positions
+      path: /wealth/v1/accounts/{accountNumber}/positions
+      operations:
+      - name: getaccountpositions
+        method: GET
+        description: Get account positions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountNumber
+          in: path
+          type: string
+          required: true
+        - name: asOfDate
+          in: query
+          type: string
+        - name: assetClass
+          in: query
+          type: string
+    authentication:
+      type: bearer
+      token: '{{env.BROADRIDGE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: wealth-positions-rest
+    port: 8080
+    description: REST adapter for Broadridge Wealth Management API — Positions. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/wealth/v1/accounts/{accountnumber}/positions
+      name: wealth-v1-accounts-accountnumber-positions
+      description: REST surface for wealth-v1-accounts-accountNumber-positions.
+      operations:
+      - method: GET
+        name: getaccountpositions
+        description: Get account positions
+        call: wealth-positions.getaccountpositions
+        with:
+          accountNumber: rest.accountNumber
+          asOfDate: rest.asOfDate
+          assetClass: rest.assetClass
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: wealth-positions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Broadridge Wealth Management API — Positions. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-account-positions
+      description: Get account positions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: wealth-positions.getaccountpositions
+      with:
+        accountNumber: tools.accountNumber
+        asOfDate: tools.asOfDate
+        assetClass: tools.assetClass
+      outputParameters:
+      - type: object
+        mapping: $.
