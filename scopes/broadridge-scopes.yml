@@ -1,0 +1,28 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/broadridge-wealth-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/broadridge-wealth-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.broadridge.example.com/oauth/token
+scopes:
+- scope: accounts:read
+  description: Read account data
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/broadridge-wealth-openapi.yml
+- scope: positions:read
+  description: Read position data
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/broadridge-wealth-openapi.yml
+- scope: transactions:read
+  description: Read transaction data
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/broadridge-wealth-openapi.yml
