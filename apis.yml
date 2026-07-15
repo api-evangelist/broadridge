@@ -91,6 +91,8 @@ apis:
       reporting functions. APIs and SFTP interfaces enable post-trade processing automation, fail management, and
       securities operations for broker-dealers and asset managers.
 common:
+  - type: AgenticAccess
+    url: agentic-access/broadridge-agentic-access.yml
   - type: DomainSecurity
     url: security/broadridge-domain-security.yml
   - type: Authentication
