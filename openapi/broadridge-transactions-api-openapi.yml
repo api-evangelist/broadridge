@@ -1,0 +1,153 @@
+openapi: 3.1.0
+info:
+  title: Broadridge Wealth Management Accounts Transactions API
+  description: The Broadridge Wealth Management API provides access to account activity, balances, positions, and transaction data for wealth management platforms. REST APIs enable broker-dealers and RIAs to integrate Broadridge back-office clearing and custody data into front-office wealth management applications.
+  version: 1.0.0
+  contact:
+    name: Broadridge Developer Contact
+    url: https://www.broadridge.com/resource/developer-api-contact
+servers:
+- url: https://api.broadridge.example.com
+  description: Broadridge Wealth API
+security:
+- oauth2: []
+- bearerAuth: []
+tags:
+- name: Transactions
+  description: Account transactions and activity
+paths:
+  /wealth/v1/accounts/{accountNumber}/transactions:
+    get:
+      operationId: getAccountTransactions
+      summary: Get account transactions
+      description: Retrieve transaction history for an account within a date range.
+      tags:
+      - Transactions
+      parameters:
+      - name: accountNumber
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: toDate
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: transactionType
+        in: query
+        schema:
+          type: string
+          enum:
+          - Buy
+          - Sell
+          - Dividend
+          - Interest
+          - Transfer
+          - Fee
+          - Deposit
+          - Withdrawal
+          - Reinvestment
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          default: 50
+      responses:
+        '200':
+          description: Account transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionList'
+components:
+  schemas:
+    TransactionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    Transaction:
+      type: object
+      properties:
+        transactionId:
+          type: string
+        accountNumber:
+          type: string
+        tradeDate:
+          type: string
+          format: date
+        settleDate:
+          type: string
+          format: date
+        transactionType:
+          type: string
+          enum:
+          - Buy
+          - Sell
+          - Dividend
+          - Interest
+          - Transfer
+          - Fee
+          - Deposit
+          - Withdrawal
+          - Reinvestment
+        cusip:
+          type: string
+        symbol:
+          type: string
+        securityDescription:
+          type: string
+        quantity:
+          type: number
+        price:
+          type: number
+        netAmount:
+          type: number
+        grossAmount:
+          type: number
+        commission:
+          type: number
+        fees:
+          type: number
+        currency:
+          type: string
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalPages:
+          type: integer
+        totalItems:
+          type: integer
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.broadridge.example.com/oauth/token
+          scopes:
+            accounts:read: Read account data
+            positions:read: Read position data
+            transactions:read: Read transaction data
+    bearerAuth:
+      type: http
+      scheme: bearer

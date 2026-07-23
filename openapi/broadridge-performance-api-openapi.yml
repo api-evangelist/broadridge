@@ -1,0 +1,97 @@
+openapi: 3.1.0
+info:
+  title: Broadridge Wealth Management Accounts Performance API
+  description: The Broadridge Wealth Management API provides access to account activity, balances, positions, and transaction data for wealth management platforms. REST APIs enable broker-dealers and RIAs to integrate Broadridge back-office clearing and custody data into front-office wealth management applications.
+  version: 1.0.0
+  contact:
+    name: Broadridge Developer Contact
+    url: https://www.broadridge.com/resource/developer-api-contact
+servers:
+- url: https://api.broadridge.example.com
+  description: Broadridge Wealth API
+security:
+- oauth2: []
+- bearerAuth: []
+tags:
+- name: Performance
+  description: Portfolio performance data
+paths:
+  /wealth/v1/accounts/{accountNumber}/performance:
+    get:
+      operationId: getAccountPerformance
+      summary: Get account performance
+      description: Retrieve time-weighted return and performance metrics for an account.
+      tags:
+      - Performance
+      parameters:
+      - name: accountNumber
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: toDate
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: benchmark
+        in: query
+        description: Benchmark ticker symbol for comparison
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Account performance data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountPerformance'
+components:
+  schemas:
+    AccountPerformance:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        fromDate:
+          type: string
+          format: date
+        toDate:
+          type: string
+          format: date
+        timeWeightedReturn:
+          type: number
+          description: Time-weighted rate of return as percentage
+        moneyWeightedReturn:
+          type: number
+        beginningValue:
+          type: number
+        endingValue:
+          type: number
+        netCashFlow:
+          type: number
+        incomeEarned:
+          type: number
+        benchmarkReturn:
+          type: number
+        benchmarkSymbol:
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.broadridge.example.com/oauth/token
+          scopes:
+            accounts:read: Read account data
+            positions:read: Read position data
+            transactions:read: Read transaction data
+    bearerAuth:
+      type: http
+      scheme: bearer
