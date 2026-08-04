@@ -1,0 +1,20 @@
+{
+  "provider": "broadridge",
+  "sources": [
+    "broadridge-accounts-api-openapi.yml",
+    "broadridge-performance-api-openapi.yml",
+    "broadridge-positions-api-openapi.yml",
+    "broadridge-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "broadridge-accounts-api-openapi.yml",
+    "broadridge-performance-api-openapi.yml",
+    "broadridge-positions-api-openapi.yml",
+    "broadridge-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
