@@ -1,0 +1,199 @@
+{
+  "item": [
+    {
+      "id": "67f6951e-b1db-4216-b21f-c4c9db7d2411",
+      "name": "Transactions",
+      "description": {
+        "content": "Account transactions and activity",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0e306e15-cc15-4fab-835c-db53715bc044",
+          "name": "Get account transactions",
+          "request": {
+            "name": "Get account transactions",
+            "description": {
+              "content": "Retrieve transaction history for an account within a date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wealth",
+                "v1",
+                "accounts",
+                ":accountNumber",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7b88a839-9285-40e1-8000-396e70ee52b6",
+              "name": "Account transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wealth",
+                    "v1",
+                    "accounts",
+                    ":accountNumber",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "transactionType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"transactionId\": \"string\",\n      \"accountNumber\": \"string\",\n      \"tradeDate\": \"1961-03-10\",\n      \"settleDate\": \"1962-01-15\",\n      \"transactionType\": \"Withdrawal\",\n      \"cusip\": \"string\",\n      \"symbol\": \"string\",\n      \"securityDescription\": \"string\",\n      \"quantity\": 5827.534081997409,\n      \"price\": 1906.3099128718063,\n      \"netAmount\": 3209.359540803716,\n      \"grossAmount\": 8248.113829854878,\n      \"commission\": 7730.334469052527,\n      \"fees\": 4801.771725695871,\n      \"currency\": \"string\"\n    },\n    {\n      \"transactionId\": \"string\",\n      \"accountNumber\": \"string\",\n      \"tradeDate\": \"1951-07-30\",\n      \"settleDate\": \"1995-11-27\",\n      \"transactionType\": \"Fee\",\n      \"cusip\": \"string\",\n      \"symbol\": \"string\",\n      \"securityDescription\": \"string\",\n      \"quantity\": 3131.6758554915814,\n      \"price\": 4066.0291673230654,\n      \"netAmount\": 146.90286343774005,\n      \"grossAmount\": 1174.0559814712137,\n      \"commission\": 3639.9522856857434,\n      \"fees\": 1852.2479110172053,\n      \"currency\": \"string\"\n    }\n  ],\n  \"pagination\": {\n    \"page\": 6639,\n    \"pageSize\": 4962,\n    \"totalPages\": 7935,\n    \"totalItems\": 9683\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.broadridge.example.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "accounts:read positions:read transactions:read"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://auth.broadridge.example.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e16e98f1-25eb-4596-9dee-c429b5a49339",
+    "name": "Broadridge Wealth Management Accounts Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Broadridge Wealth Management API provides access to account activity, balances, positions, and transaction data for wealth management platforms. REST APIs enable broker-dealers and RIAs to integrate Broadridge back-office clearing and custody data into front-office wealth management applications.\n\nContact Support:\n Name: Broadridge Developer Contact",
+      "type": "text/plain"
+    }
+  }
+}

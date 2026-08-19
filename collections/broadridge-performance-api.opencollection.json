@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Broadridge Wealth Management Accounts Performance API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://auth.broadridge.example.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Performance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get account performance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.broadridge.example.com/wealth/v1/accounts/:accountNumber/performance",
+            "params": [
+              {
+                "name": "accountNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "benchmark",
+                "value": "",
+                "type": "query",
+                "description": "Benchmark ticker symbol for comparison"
+              }
+            ]
+          },
+          "docs": "Retrieve time-weighted return and performance metrics for an account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

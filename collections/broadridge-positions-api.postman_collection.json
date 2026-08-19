@@ -1,0 +1,171 @@
+{
+  "item": [
+    {
+      "id": "a69a88fe-a4eb-4a2f-8511-cafcb2397418",
+      "name": "Positions",
+      "description": {
+        "content": "Portfolio positions and holdings",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "28f44d1e-8c6e-48a1-aa43-b34b88c1d075",
+          "name": "Get account positions",
+          "request": {
+            "name": "Get account positions",
+            "description": {
+              "content": "Retrieve all securities holdings/positions in an account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wealth",
+                "v1",
+                "accounts",
+                ":accountNumber",
+                "positions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "assetClass",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b7a83af-8eb4-42af-94e8-38e515305d07",
+              "name": "Account positions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wealth",
+                    "v1",
+                    "accounts",
+                    ":accountNumber",
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"positionId\": \"string\",\n      \"accountNumber\": \"string\",\n      \"cusip\": \"string\",\n      \"symbol\": \"string\",\n      \"securityDescription\": \"string\",\n      \"assetClass\": \"Cash\",\n      \"quantity\": 5329.760983748984,\n      \"price\": 9986.65001550114,\n      \"marketValue\": 9211.181058502114,\n      \"costBasis\": 5860.486920305287,\n      \"unrealizedGainLoss\": 6057.709485005022,\n      \"unrealizedGainLossPct\": 1473.3718326760547,\n      \"currency\": \"string\",\n      \"asOfDate\": \"1985-06-08\"\n    },\n    {\n      \"positionId\": \"string\",\n      \"accountNumber\": \"string\",\n      \"cusip\": \"string\",\n      \"symbol\": \"string\",\n      \"securityDescription\": \"string\",\n      \"assetClass\": \"FixedIncome\",\n      \"quantity\": 8474.63903807956,\n      \"price\": 7374.644439901832,\n      \"marketValue\": 9045.099192153191,\n      \"costBasis\": 865.0898639562365,\n      \"unrealizedGainLoss\": 200.46394886975017,\n      \"unrealizedGainLossPct\": 4857.235128841799,\n      \"currency\": \"string\",\n      \"asOfDate\": \"1949-05-07\"\n    }\n  ],\n  \"totalMarketValue\": 1146.517481342323\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.broadridge.example.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "accounts:read positions:read transactions:read"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://auth.broadridge.example.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "59b45dc1-654e-4815-ac2b-1d3b38e48290",
+    "name": "Broadridge Wealth Management Accounts Positions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Broadridge Wealth Management API provides access to account activity, balances, positions, and transaction data for wealth management platforms. REST APIs enable broker-dealers and RIAs to integrate Broadridge back-office clearing and custody data into front-office wealth management applications.\n\nContact Support:\n Name: Broadridge Developer Contact",
+      "type": "text/plain"
+    }
+  }
+}

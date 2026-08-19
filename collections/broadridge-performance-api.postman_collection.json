@@ -1,0 +1,182 @@
+{
+  "item": [
+    {
+      "id": "a002261c-acf4-46d6-9e17-066b66a8ac19",
+      "name": "Performance",
+      "description": {
+        "content": "Portfolio performance data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "685e1886-4620-4c53-951f-b0e5b5fc6edb",
+          "name": "Get account performance",
+          "request": {
+            "name": "Get account performance",
+            "description": {
+              "content": "Retrieve time-weighted return and performance metrics for an account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wealth",
+                "v1",
+                "accounts",
+                ":accountNumber",
+                "performance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "benchmark",
+                  "value": "<string>",
+                  "description": "Benchmark ticker symbol for comparison"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53110c8f-1558-4ef7-8f60-5e4b37cd910d",
+              "name": "Account performance data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wealth",
+                    "v1",
+                    "accounts",
+                    ":accountNumber",
+                    "performance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "benchmark",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountNumber\": \"string\",\n  \"fromDate\": \"1949-06-20\",\n  \"toDate\": \"2021-03-31\",\n  \"timeWeightedReturn\": 8460.45399842615,\n  \"moneyWeightedReturn\": 9570.232762335152,\n  \"beginningValue\": 7835.80850853281,\n  \"endingValue\": 4087.0063943940772,\n  \"netCashFlow\": 736.0953572501971,\n  \"incomeEarned\": 7125.8829922452505,\n  \"benchmarkReturn\": 8529.705780151156,\n  \"benchmarkSymbol\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.broadridge.example.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "accounts:read positions:read transactions:read"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://auth.broadridge.example.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0a2400cf-d0a9-4e6e-99b2-f2d310ef1778",
+    "name": "Broadridge Wealth Management Accounts Performance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Broadridge Wealth Management API provides access to account activity, balances, positions, and transaction data for wealth management platforms. REST APIs enable broker-dealers and RIAs to integrate Broadridge back-office clearing and custody data into front-office wealth management applications.\n\nContact Support:\n Name: Broadridge Developer Contact",
+      "type": "text/plain"
+    }
+  }
+}

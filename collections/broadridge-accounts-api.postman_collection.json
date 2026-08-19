@@ -1,0 +1,514 @@
+{
+  "item": [
+    {
+      "id": "f48cb8d9-7312-4e11-a5fe-56f75c2687c9",
+      "name": "Accounts",
+      "description": {
+        "content": "Account information and balances",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "db83d823-52e7-444b-a12f-0b2412f2b46c",
+          "name": "List accounts",
+          "request": {
+            "name": "List accounts",
+            "description": {
+              "content": "Retrieve a list of accounts associated with the authenticated advisor or broker.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wealth",
+                "v1",
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountType",
+                  "value": "<string>",
+                  "description": "Filter by account type"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "repId",
+                  "value": "<string>",
+                  "description": "Filter by registered representative ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "25"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "960e948d-5185-4d91-acef-ee3250a80b54",
+              "name": "List of accounts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wealth",
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "repId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"accountNumber\": \"string\",\n      \"accountName\": \"string\",\n      \"accountType\": \"SEP_IRA\",\n      \"status\": \"Closed\",\n      \"registrationType\": \"string\",\n      \"taxId\": \"string\",\n      \"repId\": \"string\",\n      \"branchCode\": \"string\",\n      \"openDate\": \"1959-04-14\",\n      \"closeDate\": \"2017-02-08\",\n      \"primaryHolder\": {\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"ssn\": \"string\",\n        \"dateOfBirth\": \"1991-08-05\",\n        \"address\": {\n          \"street1\": \"string\",\n          \"street2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"postalCode\": \"string\",\n          \"country\": \"string\"\n        }\n      },\n      \"jointHolder\": {\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"ssn\": \"string\",\n        \"dateOfBirth\": \"1979-12-09\",\n        \"address\": {\n          \"street1\": \"string\",\n          \"street2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"postalCode\": \"string\",\n          \"country\": \"string\"\n        }\n      },\n      \"currentValue\": 7753.361392910494,\n      \"currency\": \"USD\"\n    },\n    {\n      \"accountNumber\": \"string\",\n      \"accountName\": \"string\",\n      \"accountType\": \"Custodial\",\n      \"status\": \"Closed\",\n      \"registrationType\": \"string\",\n      \"taxId\": \"string\",\n      \"repId\": \"string\",\n      \"branchCode\": \"string\",\n      \"openDate\": \"1950-02-10\",\n      \"closeDate\": \"1989-09-14\",\n      \"primaryHolder\": {\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"ssn\": \"string\",\n        \"dateOfBirth\": \"1984-11-15\",\n        \"address\": {\n          \"street1\": \"string\",\n          \"street2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"postalCode\": \"string\",\n          \"country\": \"string\"\n        }\n      },\n      \"jointHolder\": {\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"ssn\": \"string\",\n        \"dateOfBirth\": \"1962-02-24\",\n        \"address\": {\n          \"street1\": \"string\",\n          \"street2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"postalCode\": \"string\",\n          \"country\": \"string\"\n        }\n      },\n      \"currentValue\": 9408.714908511198,\n      \"currency\": \"USD\"\n    }\n  ],\n  \"pagination\": {\n    \"page\": 4756,\n    \"pageSize\": 7249,\n    \"totalPages\": 9502,\n    \"totalItems\": 5441\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6847cffd-f455-4883-b6a8-4c339cfd02f3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wealth",
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "repId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1d7da69-8eb9-46ef-aecd-39f8e2296de4",
+          "name": "Get account details",
+          "request": {
+            "name": "Get account details",
+            "description": {
+              "content": "Retrieve full details for a specific account including balance and registration information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wealth",
+                "v1",
+                "accounts",
+                ":accountNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountNumber",
+                  "description": "(Required) Account number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0bc4e48-6555-42f8-a4f1-95bbc5c61c90",
+              "name": "Account details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wealth",
+                    "v1",
+                    "accounts",
+                    ":accountNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountNumber",
+                      "description": "(Required) Account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountNumber\": \"string\",\n  \"accountName\": \"string\",\n  \"accountType\": \"Trust\",\n  \"status\": \"Inactive\",\n  \"registrationType\": \"string\",\n  \"taxId\": \"string\",\n  \"repId\": \"string\",\n  \"branchCode\": \"string\",\n  \"openDate\": \"1964-11-01\",\n  \"closeDate\": \"2023-10-13\",\n  \"primaryHolder\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"ssn\": \"string\",\n    \"dateOfBirth\": \"1975-03-10\",\n    \"address\": {\n      \"street1\": \"string\",\n      \"street2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postalCode\": \"string\",\n      \"country\": \"string\"\n    }\n  },\n  \"jointHolder\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"ssn\": \"string\",\n    \"dateOfBirth\": \"1969-08-05\",\n    \"address\": {\n      \"street1\": \"string\",\n      \"street2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postalCode\": \"string\",\n      \"country\": \"string\"\n    }\n  },\n  \"currentValue\": 6935.928008682304,\n  \"currency\": \"USD\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17015ea4-c285-4802-ba1e-0845211712d6",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wealth",
+                    "v1",
+                    "accounts",
+                    ":accountNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountNumber",
+                      "description": "(Required) Account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65f437a5-f66b-4fef-adb2-4763ba9ae00b",
+          "name": "Get account balances",
+          "request": {
+            "name": "Get account balances",
+            "description": {
+              "content": "Retrieve current and as-of-date balance information for an account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wealth",
+                "v1",
+                "accounts",
+                ":accountNumber",
+                "balances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>",
+                  "description": "Get balances as of a specific date"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85d36fc1-af20-49b1-b1e3-cc1d07af6054",
+              "name": "Account balances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wealth",
+                    "v1",
+                    "accounts",
+                    ":accountNumber",
+                    "balances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountNumber\": \"string\",\n  \"asOfDate\": \"2016-11-23\",\n  \"totalAccountValue\": 9845.922914031626,\n  \"netAccountValue\": 9881.990204213402,\n  \"cashBalance\": 7708.667544484046,\n  \"marginBalance\": 895.5714357233957,\n  \"longMarketValue\": 5905.959859149779,\n  \"shortMarketValue\": 8828.08126427277,\n  \"openOrderValue\": 6180.281643302737,\n  \"currency\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.broadridge.example.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "accounts:read positions:read transactions:read"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://auth.broadridge.example.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b99a7b9c-98ed-430a-bce6-568558291306",
+    "name": "Broadridge Wealth Management Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Broadridge Wealth Management API provides access to account activity, balances, positions, and transaction data for wealth management platforms. REST APIs enable broker-dealers and RIAs to integrate Broadridge back-office clearing and custody data into front-office wealth management applications.\n\nContact Support:\n Name: Broadridge Developer Contact",
+      "type": "text/plain"
+    }
+  }
+}
