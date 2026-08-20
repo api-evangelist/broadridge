@@ -22,6 +22,12 @@ apis:
   name: Broadridge Fund Data Distribution (Galaxia) API
   tags:
   - Asset Management
+  - Financial-Services
+  - Fund Data
+  - Regulatory Reporting
+  - UCITS
+  tags_raw:
+  - Asset Management
   - Financial Services
   - Fund Data
   - Regulatory Reporting
@@ -44,6 +50,12 @@ apis:
   name: Broadridge Investor Communications API
   tags:
   - Corporate Actions
+  - Financial-Services
+  - Investor Communications
+  - Proxy
+  - Shareholder Services
+  tags_raw:
+  - Corporate Actions
   - Financial Services
   - Investor Communications
   - Proxy
@@ -63,6 +75,12 @@ apis:
 - aid: broadridge:broadridge-post-trade-api
   name: Broadridge Post-Trade Processing API
   tags:
+  - Financial-Services
+  - Post-Trade
+  - Reconciliation
+  - Settlement
+  - SFTP
+  tags_raw:
   - Financial Services
   - Post-Trade
   - Reconciliation
@@ -87,6 +105,8 @@ apis:
     https://www.broadridge.com/capability/middle-and-back-office-solutions/wealth-operations/
   baseURL: https://api.broadridge.example.com
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -141,6 +161,8 @@ apis:
     https://www.broadridge.com/capability/middle-and-back-office-solutions/wealth-operations/
   baseURL: https://api.broadridge.example.com
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
