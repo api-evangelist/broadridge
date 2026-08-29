@@ -1,0 +1,36 @@
+slug: broadridge
+provider: broadridge
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Performance
+  spec_file: broadridge-performance-api-openapi.yml
+  capability_id: BC-1390.40
+  capability_id_l1: BC-1390
+  capability_name: Performance Measurement Management
+  confidence: 0.82
+  evidence: GET /wealth/v1/accounts/{accountNumber}/performance  getAccountPerformance  Get account performance;
+    schema AccountPerformance
+  reason: Account performance retrieval for wealth accounts maps to Performance Measurement Management
+    within Wealth Management Operations.
+- tag: Accounts
+  spec_file: broadridge-accounts-api-openapi.yml
+  capability_id: BC-1390
+  capability_id_l1: BC-1390
+  capability_name: Wealth Management Operations Management
+  confidence: 0.72
+  evidence: GET /wealth/v1/accounts/{accountNumber}/balances  getAccountBalances  Get account balances
+    — "access to account activity, balances, positions, and transaction data for wealth management platforms"
+  reason: Read-only brokerage account data (accounts, balances) exposed from back-office clearing/custody
+    into wealth front-office. Best fits Wealth Management Operations; no single L2 clearly named (part
+    client reporting, part custody data access), so L1 only.

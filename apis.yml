@@ -187,6 +187,9 @@ apis:
   - type: GettingStarted
     url: https://www.broadridge.com/resource/developer-api-contact
 common:
+  - type: CapabilityMap
+    url: capabilities/broadridge-capability-edges.yml
+    name: broadridge Business Capability Map
   - type: AgenticAccess
     url: agentic-access/broadridge-agentic-access.yml
   - type: DomainSecurity
