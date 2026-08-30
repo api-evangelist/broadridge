@@ -44,7 +44,6 @@ apis:
   - Fund Data
   - Regulatory Reporting
   - UCITS
-  image: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/image.png
   humanURL: >-
     https://www.broadridge.com/financial-services/asset-management/global-funds/simplify-financial-and-regulatory-reporting/fund-data-distribution-with-the-galaxia-data-api
   baseURL: https://dataapi-web.fundslibrary.net
@@ -72,7 +71,6 @@ apis:
   - Investor Communications
   - Proxy
   - Shareholder Services
-  image: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/image.png
   humanURL: https://www.broadridge.com/
   baseURL: https://api.broadridge.example.com
   properties:
@@ -98,7 +96,6 @@ apis:
   - Reconciliation
   - Settlement
   - SFTP
-  image: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/image.png
   humanURL: https://www.broadridge.com/
   baseURL: https://api.broadridge.example.com
   properties:
