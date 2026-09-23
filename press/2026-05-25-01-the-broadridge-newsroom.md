@@ -1,7 +1,9 @@
 ---
 title: The Broadridge Newsroom
 url: https://www.broadridge.com/news-room
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Broadridge Financial Solutions" press release artificial intelligence'
 position: 1
 source: serpapi-google

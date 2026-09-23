@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Broadridge Wealth Management Accounts Transactions API
+  title: Broadridge Wealth Management Transactions API
   description: The Broadridge Wealth Management API provides access to account activity, balances, positions, and transaction data for wealth management platforms. REST APIs enable broker-dealers and RIAs to integrate Broadridge back-office clearing and custody data into front-office wealth management applications.
   version: 1.0.0
   contact:
@@ -73,15 +73,6 @@ paths:
                 $ref: '#/components/schemas/TransactionList'
 components:
   schemas:
-    TransactionList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Transaction'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
     Transaction:
       type: object
       properties:
@@ -127,6 +118,15 @@ components:
           type: number
         currency:
           type: string
+    TransactionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     Pagination:
       type: object
       properties:

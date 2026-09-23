@@ -1,10 +1,7 @@
 {
   "provider": "broadridge",
   "sources": [
-    "broadridge-accounts-api-openapi.yml",
-    "broadridge-performance-api-openapi.yml",
-    "broadridge-positions-api-openapi.yml",
-    "broadridge-transactions-api-openapi.yml"
+    "_original/broadridge-wealth-openapi.yml"
   ],
   "outputs": [
     "broadridge-accounts-api-openapi.yml",
@@ -15,6 +12,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "broadridge-wealth-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "broadridge-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "broadridge-performance-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "broadridge-positions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "broadridge-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
