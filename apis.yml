@@ -29,13 +29,14 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/broadridge.png
 tags:
   - Fortune 1000
+  - Wealth Management
 url: https://raw.githubusercontent.com/api-evangelist/broadridge/refs/heads/main/apis.yml
 apis:
 - aid: broadridge:broadridge-fund-data-api
   name: Broadridge Fund Data Distribution (Galaxia) API
   tags:
   - Asset Management
-  - Financial-Services
+  - Financial Services
   - Fund Data
   - Regulatory Reporting
   - UCITS
@@ -45,6 +46,7 @@ apis:
   - Fund Data
   - Regulatory Reporting
   - UCITS
+  - Financial-Services
   humanURL: >-
     https://www.broadridge.com/financial-services/asset-management/global-funds/simplify-financial-and-regulatory-reporting/fund-data-distribution-with-the-galaxia-data-api
   baseURL: https://dataapi-web.fundslibrary.net
@@ -62,7 +64,7 @@ apis:
   name: Broadridge Investor Communications API
   tags:
   - Corporate Actions
-  - Financial-Services
+  - Financial Services
   - Investor Communications
   - Proxy
   - Shareholder Services
@@ -72,6 +74,7 @@ apis:
   - Investor Communications
   - Proxy
   - Shareholder Services
+  - Financial-Services
   humanURL: https://www.broadridge.com/
   baseURL: https://api.broadridge.example.com
   properties:
@@ -86,7 +89,7 @@ apis:
 - aid: broadridge:broadridge-post-trade-api
   name: Broadridge Post-Trade Processing API
   tags:
-  - Financial-Services
+  - Financial Services
   - Post-Trade
   - Reconciliation
   - Settlement
@@ -97,6 +100,7 @@ apis:
   - Reconciliation
   - Settlement
   - SFTP
+  - Financial-Services
   humanURL: https://www.broadridge.com/
   baseURL: https://api.broadridge.example.com
   properties:

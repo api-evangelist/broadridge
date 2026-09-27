@@ -55,15 +55,6 @@ paths:
                 $ref: '#/components/schemas/PositionList'
 components:
   schemas:
-    PositionList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Position'
-        totalMarketValue:
-          type: number
     Position:
       type: object
       properties:
@@ -104,6 +95,15 @@ components:
         asOfDate:
           type: string
           format: date
+    PositionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Position'
+        totalMarketValue:
+          type: number
   securitySchemes:
     oauth2:
       type: oauth2

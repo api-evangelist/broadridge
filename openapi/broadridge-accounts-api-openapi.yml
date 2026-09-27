@@ -120,6 +120,68 @@ paths:
                 $ref: '#/components/schemas/AccountBalances'
 components:
   schemas:
+    AccountHolder:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        ssn:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+        address:
+          $ref: '#/components/schemas/Address'
+    Address:
+      type: object
+      properties:
+        street1:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+    AccountBalances:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        asOfDate:
+          type: string
+          format: date
+        totalAccountValue:
+          type: number
+        netAccountValue:
+          type: number
+        cashBalance:
+          type: number
+        marginBalance:
+          type: number
+        longMarketValue:
+          type: number
+        shortMarketValue:
+          type: number
+        openOrderValue:
+          type: number
+        currency:
+          type: string
+    AccountList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     Account:
       type: object
       properties:
@@ -184,68 +246,6 @@ components:
           type: integer
         totalItems:
           type: integer
-    AccountList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Account'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-    AccountBalances:
-      type: object
-      properties:
-        accountNumber:
-          type: string
-        asOfDate:
-          type: string
-          format: date
-        totalAccountValue:
-          type: number
-        netAccountValue:
-          type: number
-        cashBalance:
-          type: number
-        marginBalance:
-          type: number
-        longMarketValue:
-          type: number
-        shortMarketValue:
-          type: number
-        openOrderValue:
-          type: number
-        currency:
-          type: string
-    AccountHolder:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        ssn:
-          type: string
-        dateOfBirth:
-          type: string
-          format: date
-        address:
-          $ref: '#/components/schemas/Address'
-    Address:
-      type: object
-      properties:
-        street1:
-          type: string
-        street2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        postalCode:
-          type: string
-        country:
-          type: string
   responses:
     Unauthorized:
       description: Unauthorized
