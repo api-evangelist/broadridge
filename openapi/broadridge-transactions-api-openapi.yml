@@ -73,6 +73,15 @@ paths:
                 $ref: '#/components/schemas/TransactionList'
 components:
   schemas:
+    TransactionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     Pagination:
       type: object
       properties:
@@ -84,15 +93,6 @@ components:
           type: integer
         totalItems:
           type: integer
-    TransactionList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Transaction'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
     Transaction:
       type: object
       properties:

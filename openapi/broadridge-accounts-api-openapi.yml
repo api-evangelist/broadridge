@@ -120,35 +120,17 @@ paths:
                 $ref: '#/components/schemas/AccountBalances'
 components:
   schemas:
-    AccountHolder:
+    Pagination:
       type: object
       properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        ssn:
-          type: string
-        dateOfBirth:
-          type: string
-          format: date
-        address:
-          $ref: '#/components/schemas/Address'
-    Address:
-      type: object
-      properties:
-        street1:
-          type: string
-        street2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        postalCode:
-          type: string
-        country:
-          type: string
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalPages:
+          type: integer
+        totalItems:
+          type: integer
     AccountBalances:
       type: object
       properties:
@@ -228,6 +210,35 @@ components:
         currency:
           type: string
           default: USD
+    Address:
+      type: object
+      properties:
+        street1:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+    AccountHolder:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        ssn:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+        address:
+          $ref: '#/components/schemas/Address'
     Error:
       type: object
       properties:
@@ -235,17 +246,6 @@ components:
           type: string
         message:
           type: string
-    Pagination:
-      type: object
-      properties:
-        page:
-          type: integer
-        pageSize:
-          type: integer
-        totalPages:
-          type: integer
-        totalItems:
-          type: integer
   responses:
     Unauthorized:
       description: Unauthorized
