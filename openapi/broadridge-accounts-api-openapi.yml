@@ -120,6 +120,22 @@ paths:
                 $ref: '#/components/schemas/AccountBalances'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    AccountList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     Pagination:
       type: object
       properties:
@@ -131,39 +147,21 @@ components:
           type: integer
         totalItems:
           type: integer
-    AccountBalances:
+    Address:
       type: object
       properties:
-        accountNumber:
+        street1:
           type: string
-        asOfDate:
+        street2:
           type: string
-          format: date
-        totalAccountValue:
-          type: number
-        netAccountValue:
-          type: number
-        cashBalance:
-          type: number
-        marginBalance:
-          type: number
-        longMarketValue:
-          type: number
-        shortMarketValue:
-          type: number
-        openOrderValue:
-          type: number
-        currency:
+        city:
           type: string
-    AccountList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Account'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
     Account:
       type: object
       properties:
@@ -210,20 +208,29 @@ components:
         currency:
           type: string
           default: USD
-    Address:
+    AccountBalances:
       type: object
       properties:
-        street1:
+        accountNumber:
           type: string
-        street2:
+        asOfDate:
           type: string
-        city:
-          type: string
-        state:
-          type: string
-        postalCode:
-          type: string
-        country:
+          format: date
+        totalAccountValue:
+          type: number
+        netAccountValue:
+          type: number
+        cashBalance:
+          type: number
+        marginBalance:
+          type: number
+        longMarketValue:
+          type: number
+        shortMarketValue:
+          type: number
+        openOrderValue:
+          type: number
+        currency:
           type: string
     AccountHolder:
       type: object
@@ -239,22 +246,15 @@ components:
           format: date
         address:
           $ref: '#/components/schemas/Address'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
   responses:
-    Unauthorized:
-      description: Unauthorized
+    NotFound:
+      description: Not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not found
+    Unauthorized:
+      description: Unauthorized
       content:
         application/json:
           schema:
