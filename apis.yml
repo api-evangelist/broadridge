@@ -189,6 +189,12 @@ apis:
   - type: GettingStarted
     url: https://www.broadridge.com/resource/developer-api-contact
 common:
+  - type: Plans
+    url: plans/broadridge-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/broadridge-rate-limits.yml
+  - type: FinOps
+    url: finops/broadridge-finops.yml
   - type: CapabilityMap
     url: capabilities/broadridge-capability-edges.yml
     name: broadridge Business Capability Map
