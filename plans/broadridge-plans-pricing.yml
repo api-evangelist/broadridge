@@ -70,3 +70,23 @@ plans:
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - subscription
+  units:
+  - period
+  - request
+  plans:
+  - name: Platform Subscription / Enterprise Contract
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    - period
+    - request
+    periods:
+    - month
+    - per-use

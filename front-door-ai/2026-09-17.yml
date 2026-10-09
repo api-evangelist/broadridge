@@ -1,0 +1,31 @@
+# Front Door AI Index — broadridge — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: broadridge
+  lexicon_version: '1.0'
+  probed_at: '2026-09-25'
+  host: www.broadridge.com
+  final_host: www.broadridge.com
+  ownership: own
+  owner: broadridge
+  shares_host_with: null
+  inherited_from: null
+  alias_of: null
+  verdict: scored
+  score: 7
+  band: 4
+  band_label: moderate
+  host_score: 7
+  density: 2.93
+  words: 2389
+  tiers:
+    agentic: 1
+    core: 6
+    model: 0
+  ambiguous: 13
+  top_terms:
+    intelligence: 13
+    AI: 5
+    agentic: 1
+    artificial intelligence: 1
