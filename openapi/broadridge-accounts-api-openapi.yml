@@ -119,14 +119,34 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccountBalances'
 components:
+  responses:
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    AccountHolder:
       type: object
       properties:
-        code:
+        firstName:
           type: string
-        message:
+        lastName:
           type: string
+        ssn:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+        address:
+          $ref: '#/components/schemas/Address'
     AccountList:
       type: object
       properties:
@@ -136,32 +156,6 @@ components:
             $ref: '#/components/schemas/Account'
         pagination:
           $ref: '#/components/schemas/Pagination'
-    Pagination:
-      type: object
-      properties:
-        page:
-          type: integer
-        pageSize:
-          type: integer
-        totalPages:
-          type: integer
-        totalItems:
-          type: integer
-    Address:
-      type: object
-      properties:
-        street1:
-          type: string
-        street2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        postalCode:
-          type: string
-        country:
-          type: string
     Account:
       type: object
       properties:
@@ -232,33 +226,39 @@ components:
           type: number
         currency:
           type: string
-    AccountHolder:
+    Error:
       type: object
       properties:
-        firstName:
+        code:
           type: string
-        lastName:
+        message:
           type: string
-        ssn:
+    Address:
+      type: object
+      properties:
+        street1:
           type: string
-        dateOfBirth:
+        street2:
           type: string
-          format: date
-        address:
-          $ref: '#/components/schemas/Address'
-  responses:
-    NotFound:
-      description: Not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalPages:
+          type: integer
+        totalItems:
+          type: integer
   securitySchemes:
     oauth2:
       type: oauth2
